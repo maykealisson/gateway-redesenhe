@@ -1,0 +1,33 @@
+import { NestFactory, Reflector } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
+import {
+  FastifyAdapter,
+  NestFastifyApplication,
+} from '@nestjs/platform-fastify';
+import { PinoLogger } from './provider/logger';
+
+async function bootstrap() {
+  const app = await NestFactory.create<NestFastifyApplication>(
+    AppModule,
+    new FastifyAdapter({}),
+    { logger: new PinoLogger() },
+  );
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    }),
+  );
+  app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
+  app.enableCors({
+    origin: [],
+    preflightContinue: true,
+    methods: 'GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS',
+    credentials: true,
+  });
+  app.setGlobalPrefix('/gateway');
+  await app.listen(process.env.PORT ?? 4000);
+}
+bootstrap();
