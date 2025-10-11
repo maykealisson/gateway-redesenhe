@@ -4,7 +4,7 @@ import { AcessoRequest } from './request/acesso.request';
 import { UsuarioRequest } from './request/usuario.request';
 import { AcessoModel } from './model/acesso.model';
 
-@Controller('usuarios')
+@Controller('v1/usuarios')
 export class UsuarioController {
   constructor(private readonly usuarioService: UsuarioService) {}
 
@@ -13,7 +13,7 @@ export class UsuarioController {
     @Req() req,
     @Body() payload: UsuarioRequest,
   ): Promise<AcessoModel> {
-    return this.usuarioService.criar(req.headers, payload);
+    return this.usuarioService.criar(payload);
   }
 
   @Post('login')

@@ -11,6 +11,10 @@ export class EnvironmentVariables {
   @IsNotEmpty()
   @IsString()
   ENV: string;
+
+  @IsNotEmpty()
+  @IsString()
+  URL_LIBERTY: string;
 }
 
 export function validateEnvironmentVariables(config: Record<string, unknown>) {

@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { LibertyClient } from './liberty.client';
-import { RequestService } from 'src/provider/request/request.service';
+import { RequestModule } from 'src/provider/request/request.module';
 
 @Module({
-  imports: [RequestService],
+  imports: [RequestModule],
   providers: [LibertyClient],
+  exports: [LibertyClient],
 })
 export class ClientModule {}
