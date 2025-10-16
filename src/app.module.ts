@@ -6,6 +6,7 @@ import { LivroModule } from './livro/livro.module';
 import { InvestimentoModule } from './investimento/investimento.module';
 import { RequestModule } from './provider/request/request.module';
 import { ClientModule } from './client/client.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { ClientModule } from './client/client.module';
       isGlobal: true,
     }),
     UsuarioModule,
+    AuthModule,
     LivroModule,
     InvestimentoModule,
     RequestModule,

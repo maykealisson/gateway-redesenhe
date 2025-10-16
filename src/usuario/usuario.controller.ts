@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Req } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { AcessoRequest } from './request/acesso.request';
 import { UsuarioRequest } from './request/usuario.request';
@@ -9,10 +9,7 @@ export class UsuarioController {
   constructor(private readonly usuarioService: UsuarioService) {}
 
   @Post()
-  async createUsuario(
-    @Req() req,
-    @Body() payload: UsuarioRequest,
-  ): Promise<AcessoModel> {
+  async createUsuario(@Body() payload: UsuarioRequest): Promise<AcessoModel> {
     return this.usuarioService.criar(payload);
   }
 

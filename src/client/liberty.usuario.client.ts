@@ -5,11 +5,11 @@ import { AcessoRequest } from 'src/usuario/request/acesso.request';
 import { UsuarioRequest } from 'src/usuario/request/usuario.request';
 
 @Injectable()
-export class LibertyClient {
+export class LibertyUsuarioClient {
   private baseURL = process.env.URL_LIBERTY;
 
   constructor(private readonly requestServer: RequestService) {}
-  private readonly logger = new Logger(LibertyClient.name);
+  private readonly logger = new Logger(LibertyUsuarioClient.name);
 
   public async criarUsuario(body: UsuarioRequest): Promise<AcessoModel> {
     try {

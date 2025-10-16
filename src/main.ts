@@ -6,6 +6,7 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import { PinoLogger } from './provider/logger';
+import { AllExceptionsFilter } from './provider/exception/http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -13,6 +14,7 @@ async function bootstrap() {
     new FastifyAdapter({}),
     { logger: new PinoLogger() },
   );
+  app.useGlobalFilters(new AllExceptionsFilter());
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
