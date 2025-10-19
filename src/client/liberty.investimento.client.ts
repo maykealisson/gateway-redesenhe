@@ -33,7 +33,7 @@ export class LibertyInvestimentoClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao criar investimento: ${error.message}`);
+      this.logger.error(`Erro ao criar investimento: ${JSON.stringify(error)}`);
       throw new HttpException(
         error.reponse?.data || 'Erro ao criar investimento',
         error.response?.status || 500,
@@ -59,7 +59,9 @@ export class LibertyInvestimentoClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao buscar investimentos: ${error.message}`);
+      this.logger.error(
+        `Erro ao buscar investimentos: ${JSON.stringify(error)}`,
+      );
       throw new HttpException(
         error?.message || 'Erro ao buscar investimentos',
         error?.status || 500,
@@ -87,7 +89,7 @@ export class LibertyInvestimentoClient {
       return response;
     } catch (error) {
       this.logger.error(
-        `Erro ao buscar investimento por segmento: ${error.message}`,
+        `Erro ao buscar investimento por segmento: ${JSON.stringify(error)}`,
       );
       throw new HttpException(
         error?.message || 'Erro ao buscar investimento por segmento',
@@ -133,7 +135,9 @@ export class LibertyInvestimentoClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao deletar investimento: ${error.message}`);
+      this.logger.error(
+        `Erro ao deletar investimento: ${JSON.stringify(error)}`,
+      );
       throw new HttpException(
         error.reponse?.data || 'Erro ao deletar investimento',
         error.response?.status || 500,
@@ -154,7 +158,7 @@ export class LibertyInvestimentoClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao buscar carteira: ${error.message}`);
+      this.logger.error(`Erro ao buscar carteira: ${JSON.stringify(error)}`);
       throw new HttpException(
         error?.message || 'Erro ao buscar carteira',
         error?.status || 500,
@@ -175,7 +179,9 @@ export class LibertyInvestimentoClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao consolidar carteira: ${error.message}`);
+      this.logger.error(
+        `Erro ao consolidar carteira: ${JSON.stringify(error)}`,
+      );
       throw new HttpException(
         error?.message || 'Erro ao consolidar carteira',
         error?.status || 500,

@@ -19,7 +19,7 @@ export class LibertyUsuarioClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao criar usuario: ${error.message}`);
+      this.logger.error(`Erro ao criar usuario: ${JSON.stringify(error)}`);
       throw new HttpException(
         error?.message || 'Erro ao criar usuario',
         error?.status || 500,
@@ -35,7 +35,7 @@ export class LibertyUsuarioClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao realizar login: ${error.message}`);
+      this.logger.error(`Erro ao realizar login: ${JSON.stringify(error)}`);
       throw new HttpException(
         error.reponse?.data || 'Erro ao realizar login',
         error.response?.status || 500,

@@ -32,7 +32,7 @@ export class LibertyInvestimentoLancamentoClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao criar lancamento: ${error.message}`);
+      this.logger.error(`Erro ao criar lancamento: ${JSON.stringify(error)}`);
       throw new HttpException(
         error.reponse?.data || 'Erro ao criar lancamento',
         error.response?.status || 500,
@@ -59,7 +59,7 @@ export class LibertyInvestimentoLancamentoClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao buscar lancamento: ${error.message}`);
+      this.logger.error(`Erro ao buscar lancamento: ${JSON.stringify(error)}`);
       throw new HttpException(
         error?.message || 'Erro ao buscar lancamento',
         error?.status || 500,
@@ -82,7 +82,7 @@ export class LibertyInvestimentoLancamentoClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao deletar lancamento: ${error.message}`);
+      this.logger.error(`Erro ao deletar lancamento: ${JSON.stringify(error)}`);
       throw new HttpException(
         error.reponse?.data || 'Erro ao deletar lancamento',
         error.response?.status || 500,

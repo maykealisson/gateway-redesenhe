@@ -30,7 +30,9 @@ export class LibertyInvestimentoNotaClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao criar nota investimento: ${error.message}`);
+      this.logger.error(
+        `Erro ao criar nota investimento: ${JSON.stringify(error)}`,
+      );
       throw new HttpException(
         error.reponse?.data || 'Erro ao criar nota investimento',
         error.response?.status || 500,
@@ -57,7 +59,9 @@ export class LibertyInvestimentoNotaClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao buscar nota investimento: ${error.message}`);
+      this.logger.error(
+        `Erro ao buscar nota investimento: ${JSON.stringify(error)}`,
+      );
       throw new HttpException(
         error?.message || 'Erro ao buscar nota investimento',
         error?.status || 500,
@@ -80,7 +84,9 @@ export class LibertyInvestimentoNotaClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao deletar nota investimento: ${error.message}`);
+      this.logger.error(
+        `Erro ao deletar nota investimento: ${JSON.stringify(error)}`,
+      );
       throw new HttpException(
         error.reponse?.data || 'Erro ao deletar nota investimento',
         error.response?.status || 500,

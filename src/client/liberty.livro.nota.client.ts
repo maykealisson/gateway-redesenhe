@@ -27,7 +27,7 @@ export class LibertyLivroNotaClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao criar nota: ${error.message}`);
+      this.logger.error(`Erro ao criar nota: ${JSON.stringify(error)}`);
       throw new HttpException(
         error.reponse?.data || 'Erro ao criar nota',
         error.response?.status || 500,
@@ -54,7 +54,7 @@ export class LibertyLivroNotaClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao buscar nota: ${error.message}`);
+      this.logger.error(`Erro ao buscar nota: ${JSON.stringify(error)}`);
       throw new HttpException(
         error?.message || 'Erro ao buscar nota',
         error?.status || 500,
@@ -74,7 +74,9 @@ export class LibertyLivroNotaClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao buscar notas random : ${error.message}`);
+      this.logger.error(
+        `Erro ao buscar notas random : ${JSON.stringify(error)}`,
+      );
       throw new HttpException(
         error?.message || 'Erro ao buscar notas random',
         error?.status || 500,
@@ -99,7 +101,7 @@ export class LibertyLivroNotaClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao atualizar nota: ${error.message}`);
+      this.logger.error(`Erro ao atualizar nota: ${JSON.stringify(error)}`);
       throw new HttpException(
         error.reponse?.data || 'Erro ao atualizar nota',
         error.response?.status || 500,
@@ -122,7 +124,7 @@ export class LibertyLivroNotaClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao deletar nota: ${error.message}`);
+      this.logger.error(`Erro ao deletar nota: ${JSON.stringify(error)}`);
       throw new HttpException(
         error.reponse?.data || 'Erro ao deletar nota',
         error.response?.status || 500,

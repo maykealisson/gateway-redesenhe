@@ -31,7 +31,9 @@ export class LibertyLivroClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao buscar livro google: ${error.message}`);
+      this.logger.error(
+        `Erro ao buscar livro google: ${JSON.stringify(error)}`,
+      );
       throw new HttpException(
         error?.message || 'Erro ao buscar livro google',
         error?.status || 500,
@@ -51,7 +53,7 @@ export class LibertyLivroClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao criar livro: ${error.message}`);
+      this.logger.error(`Erro ao criar livro: ${JSON.stringify(error)}`);
       throw new HttpException(
         error.reponse?.data || 'Erro ao criar livro',
         error.response?.status || 500,
@@ -74,7 +76,7 @@ export class LibertyLivroClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao buscar livro: ${error.message}`);
+      this.logger.error(`Erro ao buscar livro: ${JSON.stringify(error)}`);
       throw new HttpException(
         error?.message || 'Erro ao buscar livro',
         error?.status || 500,
@@ -100,7 +102,9 @@ export class LibertyLivroClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao buscar livro finalizados: ${error.message}`);
+      this.logger.error(
+        `Erro ao buscar livro finalizados: ${JSON.stringify(error)}`,
+      );
       throw new HttpException(
         error?.message || 'Erro ao buscar livro finalizados',
         error?.status || 500,
@@ -127,7 +131,9 @@ export class LibertyLivroClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao buscar livro finalizados: ${error.message}`);
+      this.logger.error(
+        `Erro ao buscar livro finalizados: ${JSON.stringify(error)}`,
+      );
       throw new HttpException(
         error?.message || 'Erro ao buscar livro finalizados',
         error?.status || 500,
@@ -157,7 +163,9 @@ export class LibertyLivroClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao buscar plano leitura: ${error.message}`);
+      this.logger.error(
+        `Erro ao buscar plano leitura: ${JSON.stringify(error)}`,
+      );
       throw new HttpException(
         error?.message || 'Erro ao buscar plano leitura',
         error?.status || 500,
@@ -178,7 +186,9 @@ export class LibertyLivroClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao buscar resumo leitura: ${error.message}`);
+      this.logger.error(
+        `Erro ao buscar resumo leitura: ${JSON.stringify(error)}`,
+      );
       throw new HttpException(
         error?.message || 'Erro ao buscar resumo leitura',
         error?.status || 500,
@@ -198,7 +208,9 @@ export class LibertyLivroClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao buscar livro biblioteca: ${error.message}`);
+      this.logger.error(
+        `Erro ao buscar livro biblioteca: ${JSON.stringify(error)}`,
+      );
       throw new HttpException(
         error?.message || 'Erro ao buscar livro biblioteca',
         error?.status || 500,
@@ -222,7 +234,7 @@ export class LibertyLivroClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao atualizar livro: ${error.message}`);
+      this.logger.error(`Erro ao atualizar livro: ${JSON.stringify(error)}`);
       throw new HttpException(
         error.reponse?.data || 'Erro ao atualizar livro',
         error.response?.status || 500,
@@ -241,7 +253,7 @@ export class LibertyLivroClient {
       );
       return response;
     } catch (error) {
-      this.logger.error(`Erro ao deletar livro: ${error.message}`);
+      this.logger.error(`Erro ao deletar livro: ${JSON.stringify(error)}`);
       throw new HttpException(
         error.reponse?.data || 'Erro ao deletar livro',
         error.response?.status || 500,
