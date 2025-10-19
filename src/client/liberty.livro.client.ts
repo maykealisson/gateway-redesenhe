@@ -230,7 +230,7 @@ export class LibertyLivroClient {
     }
   }
 
-  public async deletar(token: string, id: string): Promise<Livro> {
+  public async deletar(token: string, id: string): Promise<any> {
     try {
       const headers = {
         Authorization: `Bearer ${token}`,

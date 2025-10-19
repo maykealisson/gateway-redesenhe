@@ -12,7 +12,7 @@ async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter({}),
-    { logger: new PinoLogger() },
+    // { logger: new PinoLogger() },
   );
   app.useGlobalFilters(new AllExceptionsFilter());
   app.useGlobalPipes(

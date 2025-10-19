@@ -19,6 +19,10 @@ export class AllExceptionsFilter implements ExceptionFilter {
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
+    const error =
+      exception instanceof HttpException
+        ? exception.getResponse()
+        : 'Internal server error';
     const message =
       exception instanceof HttpException ? exception.getResponse() : exception;
 
@@ -26,6 +30,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
       statusCode: status,
       timestamp: new Date().toISOString(),
       path: request.url,
+      error: error,
       message: message,
     });
   }

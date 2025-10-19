@@ -32,3 +32,9 @@ export class LivroUpdateRequest {
   @IsNumber()
   version: number;
 }
+
+export class LivroNoteRequest {
+  @IsString()
+  @IsNotEmpty()
+  note: string;
+}
