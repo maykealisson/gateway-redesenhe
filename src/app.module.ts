@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
 import { validateEnvironmentVariables } from './provider/validator/env.validator';
 import { UsuarioModule } from './usuario/usuario.module';
 import { LivroModule } from './livro/livro.module';
@@ -14,6 +16,12 @@ import { AuthModule } from './auth/auth.module';
       validate: validateEnvironmentVariables,
       isGlobal: true,
     }),
+    ThrottlerModule.forRoot([
+      {
+        ttl: 6000000, // Time to live in milliseconds (e.g., 10minutes)
+        limit: 100, // Maximum number of requests within the TTL
+      },
+    ]),
     UsuarioModule,
     AuthModule,
     LivroModule,
@@ -22,6 +30,11 @@ import { AuthModule } from './auth/auth.module';
     ClientModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
+  ],
 })
 export class AppModule {}

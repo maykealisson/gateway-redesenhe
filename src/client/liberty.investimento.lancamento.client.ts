@@ -9,7 +9,7 @@ import { RequestService } from 'src/provider/request/request.service';
 @Injectable()
 export class LibertyInvestimentoLancamentoClient {
   private baseURL = process.env.URL_LIBERTY;
-  private path = '/v1/ativo';
+  private path = '/v1/ativos';
 
   constructor(private readonly requestServer: RequestService) {}
   private readonly logger = new Logger(

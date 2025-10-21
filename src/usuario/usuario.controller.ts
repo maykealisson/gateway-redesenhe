@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { AcessoRequest } from './request/acesso.request';
 import { UsuarioRequest } from './request/usuario.request';

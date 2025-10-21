@@ -55,8 +55,8 @@ export class LibertyLivroClient {
     } catch (error) {
       this.logger.error(`Erro ao criar livro: ${JSON.stringify(error)}`);
       throw new HttpException(
-        error.reponse?.data || 'Erro ao criar livro',
-        error.response?.status || 500,
+        error?.message || 'Erro ao criar livro',
+        error?.status || 500,
       );
     }
   }

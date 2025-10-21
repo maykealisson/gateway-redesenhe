@@ -11,7 +11,9 @@ import { AllExceptionsFilter } from './provider/exception/http-exception.filter'
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter({}),
+    new FastifyAdapter({
+      trustProxy: true,
+    }),
     // { logger: new PinoLogger() },
   );
   app.useGlobalFilters(new AllExceptionsFilter());
@@ -24,7 +26,7 @@ async function bootstrap() {
   );
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
   app.enableCors({
-    origin: [],
+    origin: process.env.URL_FRONTEND,
     preflightContinue: true,
     methods: 'GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS',
     credentials: true,

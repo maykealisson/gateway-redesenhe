@@ -25,6 +25,9 @@ export class InvestimentoRequest {
   @IsOptional()
   @IsString()
   fundamento?: string;
+  @IsOptional()
+  @IsNumber()
+  valor?: string;
 }
 
 export class InvestimentoUpdateRequest {
