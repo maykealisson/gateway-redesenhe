@@ -32,7 +32,7 @@ async function bootstrap() {
     credentials: true,
   });
   app.setGlobalPrefix('/gateway');
-  await app.listen(process.env.PORT ?? 4000, () => {
+  await app.listen(process.env.PORT ?? 4000, '0.0.0.0', () => {
     console.log(`🚀 Gateway is running on: ${process.env.PORT ?? 4000}`);
   });
 }

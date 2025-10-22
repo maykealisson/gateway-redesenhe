@@ -37,8 +37,8 @@ export class LibertyUsuarioClient {
     } catch (error) {
       this.logger.error(`Erro ao realizar login: ${JSON.stringify(error)}`);
       throw new HttpException(
-        error.reponse?.data || 'Erro ao realizar login',
-        error.response?.status || 500,
+        error?.message || 'Erro ao realizar login',
+        error?.status || 500,
       );
     }
   }
