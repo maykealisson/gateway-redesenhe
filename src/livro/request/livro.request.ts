@@ -12,8 +12,9 @@ export class LivroRequest {
   @IsNotEmpty()
   @IsString()
   author: string;
+  @IsOptional()
   @IsString()
-  date_of_publication: string;
+  date_of_publication?: string;
   @IsString()
   description: string;
   @IsNumber()

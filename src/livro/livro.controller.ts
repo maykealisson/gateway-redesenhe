@@ -88,12 +88,12 @@ export class LivroController {
   }
 
   @Get('buscar-biblioteca')
-  async buscBiblioteca(
+  async buscaBiblioteca(
     @Req() req,
-    @Query() queryParams: { nome: string },
+    @Query() queryParams: { name: string },
   ): Promise<Livro[]> {
     const token = req.headers['authorization'].replace('Bearer ', '');
-    return this.service.buscarNaBiblioteca(token, queryParams.nome);
+    return this.service.buscarNaBiblioteca(token, queryParams.name);
   }
 
   @Put(':id')
