@@ -6,13 +6,13 @@ export interface ICarteira {
   moeda: IComposicaoPorcentagem[];
   quantidades: IComposicaoQuantidade[];
   ativos: IComposicaoPorcentagem[];
+  moeda_segmento: IMoedaSegmento[];
 }
 
 export interface IRenatabilidade {
   valor: number;
   porcentagem: number;
 }
-
 export interface ISegmentoPorcentagem {
   segmento: string;
   porcentagem: number;
@@ -32,6 +32,11 @@ export interface IComposicaoQuantidade {
 export interface IActiveName {
   id: number;
   nome: string;
+}
+
+export interface IMoedaSegmento {
+  moeda: string;
+  segmentos: IComposicaoPorcentagem[];
 }
 
 export interface IInvestimentoItem {
