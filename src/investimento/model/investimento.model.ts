@@ -7,6 +7,7 @@ export interface ICarteira {
   quantidades: IComposicaoQuantidade[];
   ativos: IComposicaoPorcentagem[];
   moeda_segmento: IMoedaSegmento[];
+  fundacao: IFundacao[];
 }
 
 export interface IRenatabilidade {
@@ -37,6 +38,11 @@ export interface IActiveName {
 export interface IMoedaSegmento {
   moeda: string;
   segmentos: IComposicaoPorcentagem[];
+}
+
+export interface IFundacao {
+  categoria: string;
+  porcentagem: number;
 }
 
 export interface IInvestimentoItem {
