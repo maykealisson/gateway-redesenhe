@@ -26,9 +26,25 @@ async function bootstrap() {
   );
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
   app.enableCors({
-    origin: process.env.URL_FRONTEND,
-    preflightContinue: true,
-    methods: 'GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS',
+    origin: (origin, cb) => {
+      // permitir chamadas sem origin (tools, curl) ou comparar com env
+      const allowed = [
+        process.env.URL_FRONTEND,
+        'https://www.redesenhe.com.br',
+      ].filter(Boolean);
+      if (!origin || allowed.includes(origin)) {
+        cb(null, true);
+      } else {
+        cb(new Error('Not allowed by CORS'), false);
+      }
+    },
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
+    allowedHeaders: [
+      'Content-Type',
+      'Authorization',
+      'X-Requested-With',
+      'Accept',
+    ],
     credentials: true,
   });
   app.setGlobalPrefix('/gateway');
