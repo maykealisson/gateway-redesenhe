@@ -9,6 +9,7 @@ import { InvestimentoModule } from './investimento/investimento.module';
 import { RequestModule } from './provider/request/request.module';
 import { ClientModule } from './client/client.module';
 import { AuthModule } from './auth/auth.module';
+import { MetaModule } from './meta/meta.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { AuthModule } from './auth/auth.module';
     InvestimentoModule,
     RequestModule,
     ClientModule,
+    MetaModule,
   ],
   controllers: [],
   providers: [

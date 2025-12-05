@@ -6,6 +6,7 @@ import { RequestModule } from 'src/provider/request/request.module';
 import { LibertyLivroNotaClient } from './liberty.livro.nota.client';
 import { LibertyInvestimentoLancamentoClient } from './liberty.investimento.lancamento.client';
 import { LibertyInvestimentoNotaClient } from './liberty.investimento.nota.client';
+import { LibertyMetaClient } from './liberty.meta.client';
 
 @Module({
   imports: [RequestModule],
@@ -16,6 +17,7 @@ import { LibertyInvestimentoNotaClient } from './liberty.investimento.nota.clien
     LibertyInvestimentoClient,
     LibertyInvestimentoLancamentoClient,
     LibertyInvestimentoNotaClient,
+    LibertyMetaClient,
   ],
   exports: [
     LibertyUsuarioClient,
@@ -24,6 +26,7 @@ import { LibertyInvestimentoNotaClient } from './liberty.investimento.nota.clien
     LibertyInvestimentoClient,
     LibertyInvestimentoLancamentoClient,
     LibertyInvestimentoNotaClient,
+    LibertyMetaClient,
   ],
 })
 export class ClientModule {}

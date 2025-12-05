@@ -57,7 +57,7 @@ export class InvestimentoService {
   }
 
   async buscarCarteira(token: string): Promise<ICarteira> {
-    this.logger.log(`Buscando carteira google`);
+    this.logger.log(`Buscando carteira`);
     return await this.clientInvestimento.buscarCarteira(token);
   }
 
