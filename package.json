@@ -1,6 +1,6 @@
 {
   "name": "gateway-redesenhe",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "",
   "author": "",
   "private": true,
@@ -78,6 +78,9 @@
       "**/*.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "^src/(.*)$": "<rootDir>/$1"
+    }
   }
 }

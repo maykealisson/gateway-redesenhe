@@ -3,3 +3,8 @@ export class AcessoModel {
   token: string;
   expiracao: string;
 }
+
+export class UsuarioInfoModel {
+  nome: string;
+  email: string;
+}
