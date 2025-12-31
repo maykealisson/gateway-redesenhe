@@ -26,8 +26,8 @@ export class LivroNotaService {
     return await this.clientLivroNota.criar(token, idLivro, request);
   }
 
-  async buscarRandom(token: string): Promise<Nota[]> {
-    this.logger.log(`Buscando notas random`);
+  async buscarRandom(token: string): Promise<Nota> {
+    this.logger.log(`Buscando nota do dia`);
     return await this.clientLivroNota.buscarRandom(token);
   }
 

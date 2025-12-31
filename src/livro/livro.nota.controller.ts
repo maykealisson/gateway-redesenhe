@@ -38,8 +38,8 @@ export class LivroNotaController {
     return this.service.criar(token, idLivro, request);
   }
 
-  @Get('/notes-random')
-  async buscarRandom(@Req() req): Promise<Nota[]> {
+  @Get('/nota-do-dia')
+  async buscarRandom(@Req() req): Promise<Nota> {
     const token = req.headers['authorization'].replace('Bearer ', '');
     return this.service.buscarRandom(token);
   }

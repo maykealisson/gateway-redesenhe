@@ -62,13 +62,13 @@ export class LibertyLivroNotaClient {
     }
   }
 
-  public async buscarRandom(token: string): Promise<Nota[]> {
+  public async buscarRandom(token: string): Promise<Nota> {
     try {
-      var path = '/v1/livros/notes/notes-random';
+      var path = '/v1/livros/nota-do-dia';
       const headers = {
         Authorization: `Bearer ${token}`,
       };
-      const response = await this.requestServer.get<Nota[]>(
+      const response = await this.requestServer.get<Nota>(
         this.baseURL + path,
         headers,
       );
