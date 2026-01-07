@@ -8,13 +8,18 @@ import {
   ICarteira,
   IInvestimento,
   IInvestimentoItem,
+  INoticiasResponse,
 } from './model/investimento.model';
+import { FinNewClient } from 'src/client/fin-news.client';
 
 @Injectable()
 export class InvestimentoService {
   private readonly logger = new Logger(InvestimentoService.name);
 
-  constructor(private readonly clientInvestimento: LibertyInvestimentoClient) {}
+  constructor(
+    private readonly clientInvestimento: LibertyInvestimentoClient,
+    private readonly finNews: FinNewClient,
+  ) {}
 
   async criar(
     token: string,
@@ -69,5 +74,18 @@ export class InvestimentoService {
   async deletar(token: string, id: string): Promise<any> {
     this.logger.log(`Deletando investimento: ${id}`);
     return await this.clientInvestimento.deletar(token, id);
+  }
+
+  async buscarTickets(token: string): Promise<string[]> {
+    this.logger.log(`Buscando tickets`);
+    return await this.clientInvestimento.buscarTickets(token);
+  }
+
+  async buscarNoticiasPorTicket(
+    token: string,
+    ticket: string,
+  ): Promise<INoticiasResponse> {
+    this.logger.log(`Buscando noticias do ticket: ${ticket}`);
+    return await this.finNews.buscarNoticia(ticket);
   }
 }

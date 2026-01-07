@@ -20,6 +20,7 @@ import {
   ICarteira,
   IInvestimento,
   IInvestimentoItem,
+  INoticiasResponse,
 } from './model/investimento.model';
 
 @UseGuards(AuthorizationHeaderGuard)
@@ -81,5 +82,20 @@ export class InvestimentoController {
   async deletar(@Req() req, @Param('id') id: string): Promise<any> {
     const token = req.headers['authorization'].replace('Bearer ', '');
     return this.service.deletar(token, id);
+  }
+
+  @Get('/tickets')
+  async buscarTickets(@Req() req): Promise<string[]> {
+    const token = req.headers['authorization'].replace('Bearer ', '');
+    return this.service.buscarTickets(token);
+  }
+
+  @Get('/noticias/:ticket')
+  async buscarNoticiasPorTicket(
+    @Req() req,
+    @Param('ticket') ticket: string,
+  ): Promise<INoticiasResponse> {
+    const token = req.headers['authorization'].replace('Bearer ', '');
+    return this.service.buscarNoticiasPorTicket(token, ticket);
   }
 }

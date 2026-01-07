@@ -103,3 +103,15 @@ export interface IAtivoNota {
   totalElements: number;
   size: number;
 }
+
+export interface INoticiasResponse {
+  noticias: INoticiaItem[];
+}
+
+export interface INoticiaItem {
+  link: string;
+  titulo: string;
+  resumo: string;
+  data: string;
+  images: string[];
+}

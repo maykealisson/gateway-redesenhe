@@ -188,4 +188,25 @@ export class LibertyInvestimentoClient {
       );
     }
   }
+
+  public async buscarTickets(token: string): Promise<string[]> {
+    try {
+      var path = this.path + '/tickers';
+
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+      const response = await this.requestServer.get<string[]>(
+        this.baseURL + path,
+        headers,
+      );
+      return response;
+    } catch (error) {
+      this.logger.error(`Erro ao buscar tickets: ${JSON.stringify(error)}`);
+      throw new HttpException(
+        error?.message || 'Erro ao buscar tickets',
+        error?.status || 500,
+      );
+    }
+  }
 }
