@@ -115,3 +115,21 @@ export interface INoticiaItem {
   data: string;
   images: string[];
 }
+
+export interface IExtratoItem {
+  id: number;
+  operacao: 'COMPRA' | 'VENDA';
+  ticket: string;
+  moeda: 'REAL' | 'DOLAR';
+  quantidade: number;
+  valor: number;
+  total: number;
+  data_operacao: string;
+}
+
+export interface IExtrato {
+  content: IExtratoItem[];
+  totalPages: number;
+  totalElements: number;
+  size: number;
+}

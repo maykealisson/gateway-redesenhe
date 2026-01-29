@@ -18,6 +18,7 @@ import {
 } from './request/investimento.request';
 import {
   ICarteira,
+  IExtrato,
   IInvestimento,
   IInvestimentoItem,
   INoticiasResponse,
@@ -97,5 +98,14 @@ export class InvestimentoController {
   ): Promise<INoticiasResponse> {
     const token = req.headers['authorization'].replace('Bearer ', '');
     return this.service.buscarNoticiasPorTicket(token, ticket);
+  }
+
+  @Get('extratos')
+  async buscaExtratos(
+    @Req() req,
+    @Query() queryParams: { page?: number },
+  ): Promise<IExtrato> {
+    const token = req.headers['authorization'].replace('Bearer ', '');
+    return this.service.buscarExtratos(token, queryParams?.page);
   }
 }

@@ -6,6 +6,7 @@ import {
 } from './request/investimento.request';
 import {
   ICarteira,
+  IExtrato,
   IInvestimento,
   IInvestimentoItem,
   INoticiasResponse,
@@ -87,5 +88,10 @@ export class InvestimentoService {
   ): Promise<INoticiasResponse> {
     this.logger.log(`Buscando noticias do ticket: ${ticket}`);
     return await this.finNews.buscarNoticia(ticket);
+  }
+
+  async buscarExtratos(token: string, pagina?: number): Promise<IExtrato> {
+    this.logger.log(`Buscando extratos: ${pagina}`);
+    return await this.clientInvestimento.buscarExtratos(token, pagina);
   }
 }

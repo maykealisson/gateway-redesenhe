@@ -1,6 +1,7 @@
 import { HttpException, Injectable, Logger } from '@nestjs/common';
 import {
   ICarteira,
+  IExtrato,
   IInvestimento,
   IInvestimentoItem,
 } from 'src/investimento/model/investimento.model';
@@ -205,6 +206,32 @@ export class LibertyInvestimentoClient {
       this.logger.error(`Erro ao buscar tickets: ${JSON.stringify(error)}`);
       throw new HttpException(
         error?.message || 'Erro ao buscar tickets',
+        error?.status || 500,
+      );
+    }
+  }
+
+  public async buscarExtratos(
+    token: string,
+    pagina?: number,
+  ): Promise<IExtrato> {
+    try {
+      var path = this.path + '/extratos';
+      if (pagina) {
+        path += '?page=' + pagina;
+      }
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+      const response = await this.requestServer.get<IExtrato>(
+        this.baseURL + path,
+        headers,
+      );
+      return response;
+    } catch (error) {
+      this.logger.error(`Erro ao buscar extratos: ${JSON.stringify(error)}`);
+      throw new HttpException(
+        error?.message || 'Erro ao buscar extratos',
         error?.status || 500,
       );
     }
