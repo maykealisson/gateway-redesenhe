@@ -20,7 +20,7 @@ import { MetaModule } from './meta/meta.module';
     ThrottlerModule.forRoot([
       {
         ttl: 6000000, // Time to live in milliseconds (e.g., 10minutes)
-        limit: 100, // Maximum number of requests within the TTL
+        limit: 300, // Maximum number of requests within the TTL
       },
     ]),
     UsuarioModule,
