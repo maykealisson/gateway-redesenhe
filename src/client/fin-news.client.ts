@@ -20,7 +20,7 @@ export class FinNewClient {
         headers,
       );
       return response;
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(`Erro ao buscar noticia: ${JSON.stringify(error)}`);
       throw new HttpException(
         error?.message || 'Erro ao buscar noticia',

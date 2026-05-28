@@ -21,7 +21,7 @@ export class LibertyNotificacaoClient {
         headers,
       );
       return response;
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(
         `Erro ao buscar notificacoes: ${JSON.stringify(error)}`,
       );
@@ -43,7 +43,7 @@ export class LibertyNotificacaoClient {
         headers,
       );
       return response;
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(
         `Erro ao atualizar notificacao: ${JSON.stringify(error)}`,
       );

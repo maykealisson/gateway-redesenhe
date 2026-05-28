@@ -29,7 +29,7 @@ export class LibertyInvestimentoNotaClient {
         headers,
       );
       return response;
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(
         `Erro ao criar nota investimento: ${JSON.stringify(error)}`,
       );
@@ -58,7 +58,7 @@ export class LibertyInvestimentoNotaClient {
         headers,
       );
       return response;
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(
         `Erro ao buscar nota investimento: ${JSON.stringify(error)}`,
       );
@@ -83,7 +83,7 @@ export class LibertyInvestimentoNotaClient {
         headers,
       );
       return response;
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(
         `Erro ao deletar nota investimento: ${JSON.stringify(error)}`,
       );

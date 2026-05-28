@@ -33,7 +33,7 @@ export class LibertyInvestimentoClient {
         headers,
       );
       return response;
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(`Erro ao criar investimento: ${JSON.stringify(error)}`);
       throw new HttpException(
         error.reponse?.data || 'Erro ao criar investimento',
@@ -59,7 +59,7 @@ export class LibertyInvestimentoClient {
         headers,
       );
       return response;
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(
         `Erro ao buscar investimentos: ${JSON.stringify(error)}`,
       );
@@ -88,7 +88,7 @@ export class LibertyInvestimentoClient {
         headers,
       );
       return response;
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(
         `Erro ao buscar investimento por segmento: ${JSON.stringify(error)}`,
       );
@@ -114,7 +114,7 @@ export class LibertyInvestimentoClient {
         headers,
       );
       return response;
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(
         `Erro ao atualizar investimento: ${JSON.stringify(error)}`,
       );
@@ -135,7 +135,7 @@ export class LibertyInvestimentoClient {
         headers,
       );
       return response;
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(
         `Erro ao deletar investimento: ${JSON.stringify(error)}`,
       );
@@ -158,7 +158,7 @@ export class LibertyInvestimentoClient {
         headers,
       );
       return response;
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(`Erro ao buscar carteira: ${JSON.stringify(error)}`);
       throw new HttpException(
         error?.message || 'Erro ao buscar carteira',
@@ -179,7 +179,7 @@ export class LibertyInvestimentoClient {
         headers,
       );
       return response;
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(
         `Erro ao consolidar carteira: ${JSON.stringify(error)}`,
       );
@@ -202,7 +202,7 @@ export class LibertyInvestimentoClient {
         headers,
       );
       return response;
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(`Erro ao buscar tickets: ${JSON.stringify(error)}`);
       throw new HttpException(
         error?.message || 'Erro ao buscar tickets',
@@ -228,7 +228,7 @@ export class LibertyInvestimentoClient {
         headers,
       );
       return response;
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(`Erro ao buscar extratos: ${JSON.stringify(error)}`);
       throw new HttpException(
         error?.message || 'Erro ao buscar extratos',

@@ -21,7 +21,7 @@ export class LibertyMetaClient {
         headers,
       );
       return response;
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(`Erro ao buscar metas: ${JSON.stringify(error)}`);
       throw new HttpException(
         error?.message || 'Erro ao buscar metas',
@@ -41,7 +41,7 @@ export class LibertyMetaClient {
         headers,
       );
       return response;
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(`Erro ao criar meta: ${JSON.stringify(error)}`);
       throw new HttpException(
         error?.message || 'Erro ao criar meta',
@@ -65,7 +65,7 @@ export class LibertyMetaClient {
         headers,
       );
       return response;
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(`Erro ao atualizar meta: ${JSON.stringify(error)}`);
       throw new HttpException(
         error.reponse?.data || 'Erro ao atualizar meta',
@@ -84,7 +84,7 @@ export class LibertyMetaClient {
         headers,
       );
       return response;
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(`Erro ao deletar meta: ${JSON.stringify(error)}`);
       throw new HttpException(
         error.reponse?.data || 'Erro ao deletar meta',

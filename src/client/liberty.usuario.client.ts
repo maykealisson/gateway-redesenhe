@@ -22,7 +22,7 @@ export class LibertyUsuarioClient {
         body,
       );
       return response;
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(`Erro ao criar usuario: ${JSON.stringify(error)}`);
       throw new HttpException(
         error?.message || 'Erro ao criar usuario',
@@ -38,7 +38,7 @@ export class LibertyUsuarioClient {
         body,
       );
       return response;
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(`Erro ao realizar login: ${JSON.stringify(error)}`);
       throw new HttpException(
         error?.message || 'Erro ao realizar login',
@@ -57,7 +57,7 @@ export class LibertyUsuarioClient {
         headers,
       );
       return response;
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(
         `Erro ao buscar info usuario: ${JSON.stringify(error)}`,
       );
@@ -82,7 +82,7 @@ export class LibertyUsuarioClient {
         headers,
       );
       return;
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(`Erro ao atualizar email: ${JSON.stringify(error)}`);
       throw new HttpException(
         error?.message || 'Erro ao atualizar email',
@@ -105,7 +105,7 @@ export class LibertyUsuarioClient {
         headers,
       );
       return;
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(`Erro ao atualizar senha: ${JSON.stringify(error)}`);
       throw new HttpException(
         error?.message || 'Erro ao atualizar senha',
