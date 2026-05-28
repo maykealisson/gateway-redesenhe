@@ -1,10 +1,10 @@
 export class Meta {
-  nome: string;
-  descricao: string;
-  categoria: string;
-  valor: string;
-  valorAtual: string;
-  porcentagemConclusao: number;
-  dataConclusao: string;
-  version: number;
+  nome: string | undefined;
+  descricao: string | undefined;
+  categoria: string | undefined;
+  valor: string | undefined;
+  valorAtual: string | undefined;
+  porcentagemConclusao: number | undefined;
+  dataConclusao: string | undefined;
+  version: number | undefined;
 }

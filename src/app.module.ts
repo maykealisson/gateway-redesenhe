@@ -10,6 +10,7 @@ import { RequestModule } from './provider/request/request.module';
 import { ClientModule } from './client/client.module';
 import { AuthModule } from './auth/auth.module';
 import { MetaModule } from './meta/meta.module';
+import { NotificacaoModule } from './notificacoes/notificacao.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { MetaModule } from './meta/meta.module';
     RequestModule,
     ClientModule,
     MetaModule,
+    NotificacaoModule,
   ],
   controllers: [],
   providers: [
