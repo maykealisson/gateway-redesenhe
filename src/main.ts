@@ -27,15 +27,21 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
   app.enableCors({
     origin: (origin, cb) => {
-      // permitir chamadas sem origin (tools, curl) ou comparar com env
+      const frontendEnv = process.env.URL_FRONTEND
+        ? process.env.URL_FRONTEND.replace(/\/$/, '')
+        : null;
+
       const allowed = [
-        process.env.URL_FRONTEND,
+        frontendEnv,
         'https://www.redesenhe.com.br',
+        'https://redesenhe.com.br',
+        'http://localhost:3000',
       ].filter(Boolean);
+
       if (!origin || allowed.includes(origin)) {
         cb(null, true);
       } else {
-        cb(new Error('Not allowed by CORS'), false);
+        cb(null, false);
       }
     },
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
@@ -44,6 +50,10 @@ async function bootstrap() {
       'Authorization',
       'X-Requested-With',
       'Accept',
+      'Origin',
+      'Access-Control-Allow-Headers',
+      'Access-Control-Request-Method',
+      'Access-Control-Request-Headers',
     ],
     credentials: true,
   });

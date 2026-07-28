@@ -1,6 +1,6 @@
 {
   "name": "gateway-redesenhe",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "",
   "author": "",
   "private": true,
@@ -61,7 +61,7 @@
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^6.0.3",
+    "typescript": "^5.7.3",
     "typescript-eslint": "^8.57.1"
   },
   "jest": {
