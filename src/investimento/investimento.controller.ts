@@ -1,5 +1,10 @@
+import type { FastifyReply } from 'fastify';
+import { Throttle } from '@nestjs/throttler';
+import { IConsolidacaoCarteira } from './model/consolidacao.model';
 import {
   Controller,
+  Header,
+  HttpCode,
   Post,
   Body,
   UseGuards,
@@ -8,6 +13,7 @@ import {
   Put,
   Delete,
   Req,
+  Res,
   Query,
 } from '@nestjs/common';
 import { AuthorizationHeaderGuard } from 'src/auth/guards/authorization-header.guard';
@@ -67,6 +73,28 @@ export class InvestimentoController {
   async consolidaCarteira(@Req() req): Promise<any> {
     const token = req.headers['authorization'].replace('Bearer ', '');
     return this.service.consolidar(token);
+  }
+
+  @Post('/consolida-carteira')
+  @HttpCode(202)
+  @Header('Cache-Control', 'no-store')
+  @Header('Retry-After', '3')
+  async iniciarConsolidacao(@Req() req): Promise<IConsolidacaoCarteira> {
+    const token = req.headers['authorization'].replace('Bearer ', '');
+    return this.service.iniciarConsolidacao(token);
+  }
+
+  @Get('/consolida-carteira/status')
+  @Header('Cache-Control', 'no-store')
+  @Throttle({ default: { limit: 30, ttl: 60000 } })
+  async consultarConsolidacao(
+    @Req() req,
+    @Res({ passthrough: true }) reply: FastifyReply,
+  ): Promise<IConsolidacaoCarteira | null> {
+    const token = req.headers['authorization'].replace('Bearer ', '');
+    const status = await this.service.consultarConsolidacao(token);
+    if (!status) reply.code(204);
+    return status;
   }
 
   @Put(':id')

@@ -1,3 +1,4 @@
+import { IConsolidacaoCarteira } from 'src/investimento/model/consolidacao.model';
 import { HttpException, Injectable, Logger } from '@nestjs/common';
 import {
   ICarteira,
@@ -186,6 +187,40 @@ export class LibertyInvestimentoClient {
       throw new HttpException(
         error?.message || 'Erro ao consolidar carteira',
         error?.status || 500,
+      );
+    }
+  }
+
+  public async iniciarConsolidacao(
+    token: string,
+  ): Promise<IConsolidacaoCarteira> {
+    try {
+      return await this.requestServer.post<IConsolidacaoCarteira>(
+        this.baseURL + this.path + '/consolida-carteira',
+        undefined,
+        { Authorization: `Bearer ${token}` },
+      );
+    } catch (error: any) {
+      throw new HttpException(
+        error?.message || 'Erro ao iniciar consolidação',
+        error?.status || error?.response?.status || 500,
+      );
+    }
+  }
+
+  public async consultarConsolidacao(
+    token: string,
+  ): Promise<IConsolidacaoCarteira | null> {
+    try {
+      const status = await this.requestServer.get<IConsolidacaoCarteira>(
+        this.baseURL + this.path + '/consolida-carteira/status',
+        { Authorization: `Bearer ${token}` },
+      );
+      return status || null;
+    } catch (error: any) {
+      throw new HttpException(
+        error?.message || 'Erro ao consultar consolidação',
+        error?.status || error?.response?.status || 500,
       );
     }
   }

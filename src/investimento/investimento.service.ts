@@ -1,3 +1,4 @@
+import { IConsolidacaoCarteira } from './model/consolidacao.model';
 import { HttpException, Injectable, Logger } from '@nestjs/common';
 import { LibertyInvestimentoClient } from 'src/client/liberty.investimento.client';
 import {
@@ -70,6 +71,16 @@ export class InvestimentoService {
   async consolidar(token: string): Promise<any> {
     this.logger.log(`Consolidando carteira`);
     return await this.clientInvestimento.consolidar(token);
+  }
+
+  async iniciarConsolidacao(token: string): Promise<IConsolidacaoCarteira> {
+    return this.clientInvestimento.iniciarConsolidacao(token);
+  }
+
+  async consultarConsolidacao(
+    token: string,
+  ): Promise<IConsolidacaoCarteira | null> {
+    return this.clientInvestimento.consultarConsolidacao(token);
   }
 
   async deletar(token: string, id: string): Promise<any> {
