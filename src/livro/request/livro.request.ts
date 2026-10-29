@@ -35,8 +35,9 @@ export class LivroUpdateRequest {
   finalizado?: boolean;
   @IsString()
   ano_leitura: string;
+  @IsOptional()
   @IsString()
-  plano_leitura: string;
+  plano_leitura?: string | null;
   @IsNumber()
   version: number;
   @IsString()
