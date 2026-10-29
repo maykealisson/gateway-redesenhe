@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { HttpModule } from '@nestjs/axios';
 import { LibertyUsuarioClient } from './liberty.usuario.client';
 import { LibertyLivroClient } from './liberty.livro.client';
 import { LibertyInvestimentoClient } from './liberty.investimento.client';
@@ -9,9 +10,10 @@ import { LibertyInvestimentoNotaClient } from './liberty.investimento.nota.clien
 import { LibertyMetaClient } from './liberty.meta.client';
 import { FinNewClient } from './fin-news.client';
 import { LibertyNotificacaoClient } from './liberty.notificacao.client';
+import { AgentFundamentClient } from './agent-fundament.client';
 
 @Module({
-  imports: [RequestModule],
+  imports: [RequestModule, HttpModule],
   providers: [
     LibertyUsuarioClient,
     LibertyLivroClient,
@@ -22,6 +24,7 @@ import { LibertyNotificacaoClient } from './liberty.notificacao.client';
     LibertyMetaClient,
     FinNewClient,
     LibertyNotificacaoClient,
+    AgentFundamentClient,
   ],
   exports: [
     LibertyUsuarioClient,
@@ -33,6 +36,7 @@ import { LibertyNotificacaoClient } from './liberty.notificacao.client';
     LibertyMetaClient,
     FinNewClient,
     LibertyNotificacaoClient,
+    AgentFundamentClient,
   ],
 })
 export class ClientModule {}

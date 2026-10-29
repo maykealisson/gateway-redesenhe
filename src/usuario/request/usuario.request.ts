@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsOptional, MaxLength } from 'class-validator';
+import { IsString, IsNotEmpty } from 'class-validator';
 
 export class UsuarioRequest {
   @IsNotEmpty()
@@ -10,10 +10,6 @@ export class UsuarioRequest {
   @IsNotEmpty()
   @IsString()
   senha: string;
-  @IsOptional()
-  @IsString()
-  @MaxLength(8192)
-  verificacao_email_token?: string;
 }
 
 export class UsuarioUpdateEmailRequest {

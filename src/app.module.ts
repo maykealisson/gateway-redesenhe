@@ -11,6 +11,7 @@ import { ClientModule } from './client/client.module';
 import { AuthModule } from './auth/auth.module';
 import { MetaModule } from './meta/meta.module';
 import { NotificacaoModule } from './notificacoes/notificacao.module';
+import { FundamentoModule } from './fundamento/fundamento.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { NotificacaoModule } from './notificacoes/notificacao.module';
     ClientModule,
     MetaModule,
     NotificacaoModule,
+    FundamentoModule,
   ],
   controllers: [],
   providers: [

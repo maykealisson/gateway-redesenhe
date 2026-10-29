@@ -9,7 +9,7 @@ import { UsuarioService } from './usuario.service';
 import { LibertyUsuarioClient } from '../client/liberty.usuario.client';
 import { RequestService } from '../provider/request/request.service';
 
-describe('Compatibilidade da confirmação de e-mail', () => {
+describe('Cadastro de usuário', () => {
   let app: NestFastifyApplication;
   const upstream = { post: jest.fn() };
   const legado = {
@@ -48,7 +48,7 @@ describe('Compatibilidade da confirmação de e-mail', () => {
   beforeEach(() => jest.clearAllMocks());
   afterAll(async () => app.close());
 
-  it('preserva o payload do cadastro anterior durante a implantação gradual', async () => {
+  it('encaminha o cadastro para o Liberty', async () => {
     upstream.post.mockResolvedValue(acesso);
     const response = await app.inject({
       method: 'POST',
@@ -63,22 +63,7 @@ describe('Compatibilidade da confirmação de e-mail', () => {
     );
   });
 
-  it('encaminha a comprovação para validação obrigatória no Liberty', async () => {
-    upstream.post.mockResolvedValue(acesso);
-    const payload = { ...legado, verificacao_email_token: 'comprovacao-clerk' };
-    const response = await app.inject({
-      method: 'POST',
-      url: '/gateway/v1/usuarios',
-      payload,
-    });
-    expect(response.statusCode).toBe(201);
-    expect(upstream.post).toHaveBeenCalledWith(
-      expect.stringContaining('/v1/usuarios'),
-      payload,
-    );
-  });
-
-  it('não permite substituir a comprovação por uma flag enviada pelo navegador', async () => {
+  it('rejeita campos fora do contrato de cadastro', async () => {
     const response = await app.inject({
       method: 'POST',
       url: '/gateway/v1/usuarios',
@@ -88,7 +73,7 @@ describe('Compatibilidade da confirmação de e-mail', () => {
     expect(upstream.post).not.toHaveBeenCalled();
   });
 
-  it('não transforma reprovação do backend em cadastro concluído', async () => {
+  it('repassa a reprovação do Liberty', async () => {
     upstream.post.mockRejectedValue({
       status: 400,
       message: 'Confirme seu e-mail',
