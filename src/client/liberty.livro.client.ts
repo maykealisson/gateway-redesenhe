@@ -236,8 +236,8 @@ export class LibertyLivroClient {
     } catch (error: any) {
       this.logger.error(`Erro ao atualizar livro: ${JSON.stringify(error)}`);
       throw new HttpException(
-        error.reponse?.data || 'Erro ao atualizar livro',
-        error.response?.status || 500,
+        error?.message || 'Erro ao atualizar livro',
+        error?.status || 500,
       );
     }
   }
@@ -255,8 +255,8 @@ export class LibertyLivroClient {
     } catch (error: any) {
       this.logger.error(`Erro ao deletar livro: ${JSON.stringify(error)}`);
       throw new HttpException(
-        error.reponse?.data || 'Erro ao deletar livro',
-        error.response?.status || 500,
+        error?.message || 'Erro ao deletar livro',
+        error?.status || 500,
       );
     }
   }

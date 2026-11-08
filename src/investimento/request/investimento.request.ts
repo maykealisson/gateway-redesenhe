@@ -44,6 +44,9 @@ export class InvestimentoUpdateRequest {
   @IsBoolean()
   monitorado?: boolean;
   @IsOptional()
+  @IsBoolean()
+  quarentena?: boolean;
+  @IsOptional()
   @IsString()
   fundamento?: string;
   @IsNotEmpty()

@@ -65,6 +65,7 @@ export interface IInvestimentoItem {
   valor_total: number;
   porcentagem: number;
   monitorado: boolean;
+  quarentena: boolean;
   fundamento: string;
   versao: number;
 }

@@ -37,8 +37,8 @@ export class LibertyInvestimentoClient {
     } catch (error: any) {
       this.logger.error(`Erro ao criar investimento: ${JSON.stringify(error)}`);
       throw new HttpException(
-        error.reponse?.data || 'Erro ao criar investimento',
-        error.response?.status || 500,
+        error?.message || 'Erro ao criar investimento',
+        error?.status || 500,
       );
     }
   }
@@ -120,8 +120,8 @@ export class LibertyInvestimentoClient {
         `Erro ao atualizar investimento: ${JSON.stringify(error)}`,
       );
       throw new HttpException(
-        error.reponse?.data || 'Erro ao atualizar investimento',
-        error.response?.status || 500,
+        error?.message || 'Erro ao atualizar investimento',
+        error?.status || 500,
       );
     }
   }
@@ -141,8 +141,8 @@ export class LibertyInvestimentoClient {
         `Erro ao deletar investimento: ${JSON.stringify(error)}`,
       );
       throw new HttpException(
-        error.reponse?.data || 'Erro ao deletar investimento',
-        error.response?.status || 500,
+        error?.message || 'Erro ao deletar investimento',
+        error?.status || 500,
       );
     }
   }

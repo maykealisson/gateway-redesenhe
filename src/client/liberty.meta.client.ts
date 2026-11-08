@@ -68,8 +68,8 @@ export class LibertyMetaClient {
     } catch (error: any) {
       this.logger.error(`Erro ao atualizar meta: ${JSON.stringify(error)}`);
       throw new HttpException(
-        error.reponse?.data || 'Erro ao atualizar meta',
-        error.response?.status || 500,
+        error?.message || 'Erro ao atualizar meta',
+        error?.status || 500,
       );
     }
   }
@@ -87,8 +87,8 @@ export class LibertyMetaClient {
     } catch (error: any) {
       this.logger.error(`Erro ao deletar meta: ${JSON.stringify(error)}`);
       throw new HttpException(
-        error.reponse?.data || 'Erro ao deletar meta',
-        error.response?.status || 500,
+        error?.message || 'Erro ao deletar meta',
+        error?.status || 500,
       );
     }
   }

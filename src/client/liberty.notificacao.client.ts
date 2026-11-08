@@ -48,8 +48,8 @@ export class LibertyNotificacaoClient {
         `Erro ao atualizar notificacao: ${JSON.stringify(error)}`,
       );
       throw new HttpException(
-        error.reponse?.data || 'Erro ao atualizar notificacao',
-        error.response?.status || 500,
+        error?.message || 'Erro ao atualizar notificacao',
+        error?.status || 500,
       );
     }
   }

@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { InvestimentoService } from './investimento.service';
 import { LibertyInvestimentoClient } from '../client/liberty.investimento.client';
+import { FinNewClient } from '../client/fin-news.client';
 import { InvestimentoRequest, InvestimentoUpdateRequest } from './request/investimento.request';
 import { IInvestimentoItem, IInvestimento, ICarteira } from './model/investimento.model';
 import { HttpException } from '@nestjs/common';
@@ -28,6 +29,10 @@ describe('InvestimentoService', () => {
         {
           provide: LibertyInvestimentoClient,
           useValue: mockLibertyInvestimentoClient,
+        },
+        {
+          provide: FinNewClient,
+          useValue: { buscarNoticia: jest.fn() },
         },
       ],
     }).compile();
