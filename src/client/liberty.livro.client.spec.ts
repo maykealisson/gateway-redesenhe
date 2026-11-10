@@ -203,4 +203,118 @@ describe('LibertyLivroClient', () => {
             );
         });
     });
+
+    describe('recomendacoes', () => {
+        it('deve buscar recomendacoes sem tema', async () => {
+            mockRequestService.get.mockResolvedValue([]);
+
+            const result = await client.recomendacoes(token);
+
+            expect(result).toEqual([]);
+            expect(requestService.get).toHaveBeenCalledWith(
+                expect.stringMatching(/\/v1\/livros\/recomendacoes$/),
+                expect.objectContaining({ Authorization: `Bearer ${token}` }),
+            );
+        });
+
+        it('deve codificar o tema na url', async () => {
+            mockRequestService.get.mockResolvedValue([]);
+
+            await client.recomendacoes(token, 'ficção científica');
+
+            expect(requestService.get).toHaveBeenCalledWith(
+                expect.stringContaining('/v1/livros/recomendacoes?tema=fic%C3%A7%C3%A3o%20cient%C3%ADfica'),
+                expect.anything(),
+            );
+        });
+
+        it('deve propagar erro como HttpException', async () => {
+            mockRequestService.get.mockRejectedValue({ message: 'falhou', status: 502 });
+
+            await expect(client.recomendacoes(token)).rejects.toBeInstanceOf(HttpException);
+        });
+    });
+
+    describe('trilhas', () => {
+        const trilha = { id: 1, nome: 'T', itens: [] } as any;
+
+        it('deve buscar trilhas', async () => {
+            mockRequestService.get.mockResolvedValue([trilha]);
+
+            const result = await client.buscarTrilhas(token);
+
+            expect(result).toEqual([trilha]);
+            expect(requestService.get).toHaveBeenCalledWith(
+                expect.stringContaining('/v1/livros/trilhas'),
+                expect.objectContaining({ Authorization: `Bearer ${token}` }),
+            );
+        });
+
+        it('deve buscar trilha por id', async () => {
+            mockRequestService.get.mockResolvedValue(trilha);
+
+            await client.buscarTrilha(token, '1');
+
+            expect(requestService.get).toHaveBeenCalledWith(
+                expect.stringContaining('/v1/livros/trilhas/1'),
+                expect.anything(),
+            );
+        });
+
+        it('deve criar trilha', async () => {
+            const body = { nome: 'T', itens: [] };
+            mockRequestService.post.mockResolvedValue(trilha);
+
+            const result = await client.criarTrilha(token, body);
+
+            expect(result).toEqual(trilha);
+            expect(requestService.post).toHaveBeenCalledWith(
+                expect.stringContaining('/v1/livros/trilhas'),
+                body,
+                expect.objectContaining({ Authorization: `Bearer ${token}` }),
+            );
+        });
+
+        it('deve atualizar trilha', async () => {
+            const body = { nome: 'T2' };
+            mockRequestService.put.mockResolvedValue(trilha);
+
+            await client.atualizarTrilha(token, '1', body);
+
+            expect(requestService.put).toHaveBeenCalledWith(
+                expect.stringContaining('/v1/livros/trilhas/1'),
+                body,
+                expect.anything(),
+            );
+        });
+
+        it('deve deletar trilha', async () => {
+            mockRequestService.delete.mockResolvedValue({});
+
+            await client.deletarTrilha(token, '1');
+
+            expect(requestService.delete).toHaveBeenCalledWith(
+                expect.stringContaining('/v1/livros/trilhas/1'),
+                expect.anything(),
+            );
+        });
+
+        it('deve gerar trilha por tema', async () => {
+            mockRequestService.post.mockResolvedValue(trilha);
+
+            await client.gerarTrilha(token, 'estoicismo');
+
+            expect(requestService.post).toHaveBeenCalledWith(
+                expect.stringContaining('/v1/livros/trilhas/gerar?tema=estoicismo'),
+                {},
+                expect.anything(),
+            );
+        });
+
+        it('deve propagar erro ao gerar trilha', async () => {
+            mockRequestService.post.mockRejectedValue({ message: 'sem livros', status: 400 });
+
+            await expect(client.gerarTrilha(token, 'x')).rejects.toMatchObject({ status: 400 });
+        });
+    });
 });

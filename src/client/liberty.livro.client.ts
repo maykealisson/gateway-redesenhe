@@ -1,6 +1,9 @@
 import { HttpException, Injectable, Logger } from '@nestjs/common';
 import { GoogleLivro } from 'src/livro/model/livro.google.model';
 import { Livro, LivroPage } from 'src/livro/model/livro.model';
+import { Recomendacao } from 'src/livro/model/recomendacao.model';
+import { Trilha } from 'src/livro/model/trilha.model';
+import { TrilhaRequest } from 'src/livro/request/trilha.request';
 import { Sumario } from 'src/livro/model/sumario.model';
 import { LivroUpdateRequest } from 'src/livro/request/livro.request';
 import { RequestService } from 'src/provider/request/request.service';
@@ -258,6 +261,111 @@ export class LibertyLivroClient {
         error?.message || 'Erro ao deletar livro',
         error?.status || 500,
       );
+    }
+  }
+
+  private headers(token: string) {
+    return { Authorization: `Bearer ${token}` };
+  }
+
+  private erro(mensagem: string, error: any): HttpException {
+    this.logger.error(`${mensagem}: ${JSON.stringify(error)}`);
+    return new HttpException(error?.message || mensagem, error?.status || 500);
+  }
+
+  public async recomendacoes(
+    token: string,
+    tema?: string,
+  ): Promise<Recomendacao[]> {
+    try {
+      let path = '/v1/livros/recomendacoes';
+      if (tema) {
+        path += '?tema=' + encodeURIComponent(tema);
+      }
+      return await this.requestServer.get<Recomendacao[]>(
+        this.baseURL + path,
+        this.headers(token),
+      );
+    } catch (error: any) {
+      throw this.erro('Erro ao buscar recomendações de livros', error);
+    }
+  }
+
+  public async buscarTrilhas(token: string): Promise<Trilha[]> {
+    try {
+      return await this.requestServer.get<Trilha[]>(
+        this.baseURL + '/v1/livros/trilhas',
+        this.headers(token),
+      );
+    } catch (error: any) {
+      throw this.erro('Erro ao buscar trilhas de leitura', error);
+    }
+  }
+
+  public async buscarTrilha(token: string, id: string): Promise<Trilha> {
+    try {
+      return await this.requestServer.get<Trilha>(
+        this.baseURL + '/v1/livros/trilhas/' + id,
+        this.headers(token),
+      );
+    } catch (error: any) {
+      throw this.erro('Erro ao buscar trilha de leitura', error);
+    }
+  }
+
+  public async criarTrilha(
+    token: string,
+    body: TrilhaRequest,
+  ): Promise<Trilha> {
+    try {
+      return await this.requestServer.post<Trilha>(
+        this.baseURL + '/v1/livros/trilhas',
+        body,
+        this.headers(token),
+      );
+    } catch (error: any) {
+      throw this.erro('Erro ao criar trilha de leitura', error);
+    }
+  }
+
+  public async atualizarTrilha(
+    token: string,
+    id: string,
+    body: TrilhaRequest,
+  ): Promise<Trilha> {
+    try {
+      return await this.requestServer.put<Trilha>(
+        this.baseURL + '/v1/livros/trilhas/' + id,
+        body,
+        this.headers(token),
+      );
+    } catch (error: any) {
+      throw this.erro('Erro ao atualizar trilha de leitura', error);
+    }
+  }
+
+  public async deletarTrilha(token: string, id: string): Promise<any> {
+    try {
+      return await this.requestServer.delete<any>(
+        this.baseURL + '/v1/livros/trilhas/' + id,
+        this.headers(token),
+      );
+    } catch (error: any) {
+      throw this.erro('Erro ao deletar trilha de leitura', error);
+    }
+  }
+
+  public async gerarTrilha(token: string, tema: string): Promise<Trilha> {
+    try {
+      return await this.requestServer.post<Trilha>(
+        this.baseURL +
+          '/v1/livros/trilhas/gerar?tema=' +
+          encodeURIComponent(tema),
+        {},
+        this.headers(token),
+      );
+    } catch (error: any) {
+      throw this.erro('Erro ao gerar trilha de leitura', error);
     }
   }
 }

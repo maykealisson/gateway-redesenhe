@@ -22,6 +22,7 @@ describe('LivroService', () => {
     buscarBiblioteca: jest.fn(),
     atualizar: jest.fn(),
     deletar: jest.fn(),
+    recomendacoes: jest.fn(),
   };
 
   const token = 'valid_token';
@@ -182,6 +183,25 @@ describe('LivroService', () => {
 
       expect(result).toEqual({ status: 'ok' });
       expect(client.deletar).toHaveBeenCalledWith(token, id);
+    });
+  });
+
+  describe('buscarRecomendacoes', () => {
+    it('deve buscar recomendacoes repassando o tema sem espacos', async () => {
+      mockLibertyLivroClient.recomendacoes.mockResolvedValue([]);
+
+      const result = await service.buscarRecomendacoes(token, '  estoicismo ');
+
+      expect(result).toEqual([]);
+      expect(client.recomendacoes).toHaveBeenCalledWith(token, 'estoicismo');
+    });
+
+    it('deve buscar recomendacoes sem tema', async () => {
+      mockLibertyLivroClient.recomendacoes.mockResolvedValue([]);
+
+      await service.buscarRecomendacoes(token, '  ');
+
+      expect(client.recomendacoes).toHaveBeenCalledWith(token, undefined);
     });
   });
 });

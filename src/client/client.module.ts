@@ -11,6 +11,10 @@ import { LibertyMetaClient } from './liberty.meta.client';
 import { FinNewClient } from './fin-news.client';
 import { LibertyNotificacaoClient } from './liberty.notificacao.client';
 import { AgentFundamentClient } from './agent-fundament.client';
+import { LibertyCarteiraClient } from './liberty.carteira.client';
+import { LibertyProventoClient } from './liberty.provento.client';
+import { LibertyAlertaClient } from './liberty.alerta.client';
+import { LibertyMetaAcompanhamentoClient } from './liberty.meta.acompanhamento.client';
 
 @Module({
   imports: [RequestModule, HttpModule],
@@ -25,6 +29,10 @@ import { AgentFundamentClient } from './agent-fundament.client';
     FinNewClient,
     LibertyNotificacaoClient,
     AgentFundamentClient,
+    LibertyCarteiraClient,
+    LibertyProventoClient,
+    LibertyAlertaClient,
+    LibertyMetaAcompanhamentoClient,
   ],
   exports: [
     LibertyUsuarioClient,
@@ -37,6 +45,10 @@ import { AgentFundamentClient } from './agent-fundament.client';
     FinNewClient,
     LibertyNotificacaoClient,
     AgentFundamentClient,
+    LibertyCarteiraClient,
+    LibertyProventoClient,
+    LibertyAlertaClient,
+    LibertyMetaAcompanhamentoClient,
   ],
 })
 export class ClientModule {}

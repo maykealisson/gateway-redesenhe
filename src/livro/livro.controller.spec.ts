@@ -23,6 +23,7 @@ describe('LivroController', () => {
     buscarNaBiblioteca: jest.fn(),
     atualizar: jest.fn(),
     deletar: jest.fn(),
+    buscarRecomendacoes: jest.fn(),
   };
 
   const mockAuthorizationHeaderGuard = {
@@ -184,6 +185,17 @@ describe('LivroController', () => {
 
       expect(result).toEqual({ status: 'ok' });
       expect(service.deletar).toHaveBeenCalledWith('valid_token', id);
+    });
+  });
+
+  describe('buscarRecomendacoes', () => {
+    it('deve buscar recomendacoes', async () => {
+      mockLivroService.buscarRecomendacoes.mockResolvedValue([]);
+
+      const result = await controller.buscarRecomendacoes(mockRequest, { tema: 'estoicismo' });
+
+      expect(result).toEqual([]);
+      expect(service.buscarRecomendacoes).toHaveBeenCalledWith('valid_token', 'estoicismo');
     });
   });
 });

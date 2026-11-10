@@ -11,6 +11,9 @@ export class Livro {
   ano_leitura: string;
   plano_leitura: string;
   version: number;
+  avaliacao?: number | null;
+  categorias?: string | null;
+  google_id?: string | null;
 }
 
 export class LivroPage {

@@ -4,6 +4,9 @@ import {
   IsNumber,
   IsBoolean,
   IsOptional,
+  IsInt,
+  Min,
+  Max,
 } from 'class-validator';
 export class LivroRequest {
   @IsNotEmpty()
@@ -21,6 +24,12 @@ export class LivroRequest {
   pages: number;
   @IsString()
   image_link: string;
+  @IsOptional()
+  @IsString()
+  google_id?: string | null;
+  @IsOptional()
+  @IsString()
+  categories?: string | null;
 }
 
 export class LivroUpdateRequest {
@@ -48,6 +57,17 @@ export class LivroUpdateRequest {
   data_publicacao: string;
   @IsNumber()
   paginas: number;
+  @IsOptional()
+  @IsInt()
+  @Min(1)
+  @Max(5)
+  avaliacao?: number | null;
+  @IsOptional()
+  @IsString()
+  categorias?: string | null;
+  @IsOptional()
+  @IsString()
+  google_id?: string | null;
 }
 export class LivroNoteRequest {
   @IsString()

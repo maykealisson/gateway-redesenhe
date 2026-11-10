@@ -37,3 +37,35 @@ describe('LivroUpdateRequest', () => {
     expect(await errosPlanoLeitura({ ...base, plano_leitura: 2027 })).toHaveLength(1);
   });
 });
+
+describe('LivroUpdateRequest avaliacao', () => {
+  const base = {
+    descricao: 'Desc',
+    minha_opiniao: 'Op',
+    image_link: 'link',
+    ano_leitura: '',
+    version: 1,
+    nome: 'Livro',
+    autor: 'Autor',
+    data_publicacao: '2020-01-01',
+    paginas: 100,
+  };
+
+  const errosAvaliacao = async (body: object) => {
+    const errors = await validate(plainToInstance(LivroUpdateRequest, body));
+    return errors.filter((e) => e.property === 'avaliacao');
+  };
+
+  it('deve aceitar sem avaliacao', async () => {
+    expect(await errosAvaliacao(base)).toHaveLength(0);
+  });
+
+  it('deve aceitar avaliacao entre 1 e 5', async () => {
+    expect(await errosAvaliacao({ ...base, avaliacao: 5 })).toHaveLength(0);
+  });
+
+  it('deve rejeitar avaliacao fora do intervalo', async () => {
+    expect(await errosAvaliacao({ ...base, avaliacao: 6 })).toHaveLength(1);
+    expect(await errosAvaliacao({ ...base, avaliacao: 0 })).toHaveLength(1);
+  });
+});

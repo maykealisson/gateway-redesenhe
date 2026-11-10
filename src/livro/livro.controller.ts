@@ -14,6 +14,7 @@ import { AuthorizationHeaderGuard } from 'src/auth/guards/authorization-header.g
 import { GoogleLivro } from './model/livro.google.model';
 import { Livro, LivroPage } from './model/livro.model';
 import { Sumario } from './model/sumario.model';
+import { Recomendacao } from './model/recomendacao.model';
 import { LivroService } from './livro.service';
 import { LivroRequest, LivroUpdateRequest } from './request/livro.request';
 
@@ -85,6 +86,15 @@ export class LivroController {
   async buscaResumo(@Req() req): Promise<Sumario> {
     const token = req.headers['authorization'].replace('Bearer ', '');
     return this.service.buscarResumo(token);
+  }
+
+  @Get('recomendacoes')
+  async buscarRecomendacoes(
+    @Req() req,
+    @Query() queryParams: { tema?: string },
+  ): Promise<Recomendacao[]> {
+    const token = req.headers['authorization'].replace('Bearer ', '');
+    return this.service.buscarRecomendacoes(token, queryParams?.tema);
   }
 
   @Get('buscar-biblioteca')

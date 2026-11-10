@@ -5,4 +5,6 @@ export class GoogleLivro {
   description: string;
   pages: number;
   image_link: string;
+  google_id?: string | null;
+  categories?: string | null;
 }

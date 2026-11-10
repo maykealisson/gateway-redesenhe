@@ -59,6 +59,24 @@ export class RequestService {
     );
   }
 
+  public patch<T>(
+    url: string,
+    body: any,
+    headers?: Record<string, string>,
+  ): Promise<T> {
+    return lastValueFrom(
+      this.httpService.patch<T>(url, body, { headers }).pipe(
+        map((response: AxiosResponse<T>) => response.data),
+        catchError((error) => {
+          if (error.response && error.response.data) {
+            throw error.response.data;
+          }
+          throw error;
+        }),
+      ),
+    );
+  }
+
   public delete<T>(url: string, headers?: Record<string, string>): Promise<T> {
     return lastValueFrom(
       this.httpService.delete<T>(url, { headers }).pipe(

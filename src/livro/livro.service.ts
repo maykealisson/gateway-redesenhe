@@ -3,6 +3,7 @@ import { LibertyLivroClient } from 'src/client/liberty.livro.client';
 import { GoogleLivro } from './model/livro.google.model';
 import { Livro, LivroPage } from './model/livro.model';
 import { Sumario } from './model/sumario.model';
+import { Recomendacao } from './model/recomendacao.model';
 import { LivroUpdateRequest } from './request/livro.request';
 
 @Injectable()
@@ -82,5 +83,16 @@ export class LivroService {
   async deletar(token: string, id: string): Promise<any> {
     this.logger.log(`Deletando livro: ${id}}`);
     return await this.clientLivro.deletar(token, id);
+  }
+
+  async buscarRecomendacoes(
+    token: string,
+    tema?: string,
+  ): Promise<Recomendacao[]> {
+    this.logger.log(`Buscando recomendações de livros: ${tema ?? ''}`);
+    return await this.clientLivro.recomendacoes(
+      token,
+      tema?.trim() || undefined,
+    );
   }
 }

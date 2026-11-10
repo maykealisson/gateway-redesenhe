@@ -12,6 +12,10 @@ import { AuthModule } from './auth/auth.module';
 import { MetaModule } from './meta/meta.module';
 import { NotificacaoModule } from './notificacoes/notificacao.module';
 import { FundamentoModule } from './fundamento/fundamento.module';
+import { CarteiraModule } from './carteira/carteira.module';
+import { ProventoModule } from './provento/provento.module';
+import { AlertaModule } from './alerta/alerta.module';
+import { NoticiaModule } from './noticia/noticia.module';
 
 @Module({
   imports: [
@@ -34,6 +38,10 @@ import { FundamentoModule } from './fundamento/fundamento.module';
     MetaModule,
     NotificacaoModule,
     FundamentoModule,
+    CarteiraModule,
+    ProventoModule,
+    AlertaModule,
+    NoticiaModule,
   ],
   controllers: [],
   providers: [
